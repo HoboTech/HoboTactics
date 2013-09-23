@@ -1,6 +1,6 @@
 HoboTactics
 ===========
-Tactical Strategy Game with Hobos
+Tactical Strategy Game with Hobos (and Zombies)
 
 - Xamarin Studio - http://xamarin.com/
 - MonoGame Framework - http://www.monogame.net/
