@@ -12,6 +12,11 @@ namespace Win8ShooterGame
         SpriteBatch _spriteBatch;
         Player player;
         Line line;
+        Vector2 begin = new Vector2(20, 20);
+        Vector2 end = new Vector2(110, 110);
+        Color color = Color.Red;
+        Square square;
+        Hexagon hexagon;
 
         public Game1()
         {
@@ -30,11 +35,11 @@ namespace Win8ShooterGame
             // Initialize the player class
             player = new Player();
             line = new Line();
+            square = new Square();
+            hexagon = new Hexagon();
 
             base.Initialize();
         }
-
-
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -50,6 +55,8 @@ namespace Win8ShooterGame
             Vector2 playerPosition = new Vector2(GraphicsDevice.Viewport.TitleSafeArea.X, GraphicsDevice.Viewport.TitleSafeArea.Y + GraphicsDevice.Viewport.TitleSafeArea.Height / 2);
             player.Initialize(Content.Load<Texture2D>("Graphics\\player"), playerPosition);
             line.Initialize(Content.Load<Texture2D>("Graphics\\white_1x1"));
+            square.Initialize(Content.Load<Texture2D>("Graphics\\white_1x1"));
+            hexagon.Initialize(Content.Load<Texture2D>("Graphics\\white_1x1"));
 
         }
 
@@ -86,7 +93,10 @@ namespace Win8ShooterGame
             _spriteBatch.Begin();
             // Draw the Player
             player.Draw(_spriteBatch);
-            line.Draw(_spriteBatch);
+            line.Draw(_spriteBatch, begin, end ,color);
+            square.Draw(_spriteBatch);
+            hexagon.Draw(_spriteBatch);
+
             // Stop drawing
             _spriteBatch.End();
 
