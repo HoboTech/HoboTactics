@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Win8ShooterGame
 {
     /// <summary>
-    /// This is the main type for your game
+    /// This is the main type for your Shooter game
     /// </summary>
     public class Game1 : Game
     {
