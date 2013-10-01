@@ -6,7 +6,6 @@ namespace Win8ShooterGame
 {
     class Hexagon
     {
-        float size = 75;
         Line edge;
 
         public void Initialize(Texture2D texture)
@@ -15,7 +14,7 @@ namespace Win8ShooterGame
             edge.Initialize(texture);
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 center)
+        public void Draw(SpriteBatch spriteBatch, Vector2 center, float size = 75)
         {
 
             double theta_1, theta_2;
