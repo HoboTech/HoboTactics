@@ -139,16 +139,31 @@ namespace HoboTacticsCodeTest.Cards
         }
 
         protected Card _drawCard(int at) {
-            return this.Cards.Count > 0 ? this.Cards [at] : null;
+            this.Cards[at].Deck = null; // disassociate the card from the deck
+            Card RequestedCard = this.Cards[at];
+            this.Cards.RemoveAt(at); // remove the card from the deck
+            return RequestedCard;
+
+
         }
 
         protected void _putCard(Card card, int at) {
-            if (card.Deck != null) {
-                card.Deck.RemoveCard (card);
-            }
-            card.Deck = this;
+            card.Deck = this; // associate the card to the deck
+            this.Cards.Insert(at, card); // add the card to the deck
+        }
 
-            this.Cards.Insert (at, card);
+        /// <summary>
+        /// Draws a card from the deck by it's CardID value
+        /// </summary>
+        /// <param name="cardname">Card.CardID</param>
+        public Card DrawCardByName(string cardname)
+        {
+            //find index location for name, pass that to _drawcard
+            int namedlocation;
+            namedlocation = Cards.FindIndex(i => i.CardID == cardname);
+            return this._drawCard(namedlocation);
+            //return Cards.Find(i => i.CardID == cardname);   
+            //throw new NotImplementedException();
         }
     }
 }
