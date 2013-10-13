@@ -11,6 +11,8 @@
     <AssemblyName>HoboTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,6 +58,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CardDeckTest.cs" />
@@ -66,7 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HoboTacticsCodeTest\HoboTacticsCodeTest.csproj">
-      <Project>{50e5c590-ee4e-4779-b634-31aa166bd529}</Project>
+      <Project>{50E5C590-EE4E-4779-B634-31AA166BD529}</Project>
       <Name>HoboTacticsCodeTest</Name>
     </ProjectReference>
   </ItemGroup>
