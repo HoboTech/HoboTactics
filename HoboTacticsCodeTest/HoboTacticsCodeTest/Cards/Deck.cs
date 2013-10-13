@@ -165,6 +165,15 @@ namespace HoboTacticsCodeTest.Cards
             //return Cards.Find(i => i.CardID == cardname);   
             //throw new NotImplementedException();
         }
+
+        public void AbsorbDeck(Deck DonorDeck)
+        {
+            int DonorSize = DonorDeck.Count;
+            for (int i = 0; i < DonorSize; i++)
+            {
+                this.PutCardBottom(DonorDeck.Cards[i]);
+            }
+        }
     }
 }
 

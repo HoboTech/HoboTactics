@@ -18,6 +18,24 @@ namespace HoboTests
         List<String> NonStandardCards = new List<String>() { "Joker 1", "Joker 2" };
         List<String> ExpectedDeck = new List<string>();
 
+        private Deck _createStandardDeck(Deck AnotherDeck)
+        {
+            foreach (String SCard in StandardCards)
+            {
+                foreach (String SSuit in StandardSuits)
+                {
+                    AnotherDeck.PutCardTop(new Card((SCard + " of " + SSuit)));
+                    //ExpectedDeck.Add((SCard + " of " + SSuit));
+                }
+            }
+            foreach (String Joker in NonStandardCards)
+            {
+                AnotherDeck.PutCardTop(new Card(Joker));
+                //ExpectedDeck.Add(Joker);
+            }
+            return (AnotherDeck);
+        }
+        
         [TestFixtureSetUp]
         public void CreateCards()
         {
@@ -158,6 +176,18 @@ namespace HoboTests
             int CardCount = StandardDeck.Count;
             int CardCountMinus = CardCount - CardCount - 1;
             TestDeck.PutCardAt(DeckBreaker, CardCountMinus);
+        }
+        [Test]
+        public void MergeDecks()
+        {
+            Deck TestDeck1 = new Deck();
+            this._createStandardDeck(TestDeck1);
+            Deck TestDeck2 = new Deck();
+            this._createStandardDeck(TestDeck1);
+            int CardCount1 = TestDeck1.Count;
+            int CardCount2 = TestDeck2.Count;
+            TestDeck1.AbsorbDeck(TestDeck2);
+            Assert.AreEqual((CardCount1 + CardCount2), TestDeck1.Count);            
         }
 
     }
