@@ -149,10 +149,9 @@ namespace HoboTacticsCodeTest.Cards
 
         protected void _putCard(Card card, int at) {
             card.Deck = this; // associate the card to the deck
-            
-            if (at < 0 || at > this.Count) {
-                at = 0;
-            }
+
+            // clamp to range 0-count
+            at = at < 0 ? 0 : at > this.Count ? this.Count : at;
             
             this.Cards.Insert(at, card); // add the card to the deck
         }
