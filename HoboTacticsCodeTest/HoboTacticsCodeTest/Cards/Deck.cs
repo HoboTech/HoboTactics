@@ -149,6 +149,11 @@ namespace HoboTacticsCodeTest.Cards
 
         protected void _putCard(Card card, int at) {
             card.Deck = this; // associate the card to the deck
+            
+            if (at < 0 || at > this.Count) {
+                at = 0;
+            }
+            
             this.Cards.Insert(at, card); // add the card to the deck
         }
 
@@ -166,6 +171,10 @@ namespace HoboTacticsCodeTest.Cards
             //throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Take each card from the donor deck
+        /// </summary>
+        /// <param name="DonorDeck">Deck</param>
         public void AbsorbDeck(Deck DonorDeck)
         {
             int DonorSize = DonorDeck.Count;
