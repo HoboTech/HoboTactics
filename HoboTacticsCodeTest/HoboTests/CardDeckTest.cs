@@ -135,6 +135,30 @@ namespace HoboTests
                 //Assert.IsTrue(ExpectedDeck.Contains(CurrentCard.CardID));
             }
         }
+        [Test]
+        //[ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void PutCardTooHigh()
+        {
+            Deck TestDeck = new Deck();
+            Card DeckStarter = new Card("DeckStarter");
+            Card DeckBreaker = new Card("DeckBreaker");
+            TestDeck.PutCardTop(DeckStarter);
+            int CardCount = StandardDeck.Count;
+            int CardCountPlus = CardCount + 1;
+            TestDeck.PutCardAt(DeckBreaker,CardCountPlus);                  
+        }
+        [Test]
+        //[ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void PutCardTooLow()
+        {
+            Deck TestDeck = new Deck();
+            Card DeckStarter = new Card("DeckStarter");
+            Card DeckBreaker = new Card("DeckBreaker");
+            TestDeck.PutCardTop(DeckStarter);
+            int CardCount = StandardDeck.Count;
+            int CardCountMinus = CardCount - CardCount - 1;
+            TestDeck.PutCardAt(DeckBreaker, CardCountMinus);
+        }
 
     }
 }
