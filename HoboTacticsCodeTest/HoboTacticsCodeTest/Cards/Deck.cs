@@ -90,6 +90,45 @@ namespace HoboTacticsCodeTest.Cards
         }
 
         /// <summary>
+        /// Draws a card from the deck by it's CardID value
+        /// </summary>
+        /// <param name="cardname">Card.CardID</param>
+        public Card DrawCardByName(string cardname)
+        {
+            //find index location for name, pass that to _drawcard
+            int namedlocation;
+            namedlocation = Cards.FindIndex(i => i.CardID == cardname);
+            return this._drawCard(namedlocation);
+            //return Cards.Find(i => i.CardID == cardname);   
+            //throw new NotImplementedException();
+        }
+
+        public Card PeekCard()
+        {
+            return PeekCardTop();
+        }
+
+        public Card PeekCardTop()
+        {
+            return this._peekCard(this.Cards.Count - 1);
+        }
+
+        public Card PeekCardBottom()
+        {
+            return this._peekCard(0);
+        }
+
+        public Card PeekCardAt(int at)
+        {
+            return this._peekCard(at);
+        }
+
+        public Card PeekCardRandom()
+        {
+            return this._peekCard ((int)(this._rGen.NextDouble () * this.Cards.Count));
+        }
+
+        /// <summary>
         /// Puts a card into the deck, on the top.
         /// </summary>
         /// <param name="card">Card.</param>
@@ -138,16 +177,22 @@ namespace HoboTacticsCodeTest.Cards
             this.Cards.Remove (card);
         }
 
+        protected Card _peekCard(int at)
+        {
+            return this.Cards [at];
+        }
+
         protected Card _drawCard(int at) {
             this.Cards[at].Deck = null; // disassociate the card from the deck
             Card RequestedCard = this.Cards[at];
             this.Cards.RemoveAt(at); // remove the card from the deck
-            return RequestedCard;
-
-
+            return RequestedCard; 
         }
 
         protected void _putCard(Card card, int at) {
+            if (card.Deck != null) { // need to remove from deck, in case card was peeked instead of drawn.
+                card.Deck.RemoveCard (card);
+            }
             card.Deck = this; // associate the card to the deck
 
             // clamp to range 0-count
@@ -157,29 +202,13 @@ namespace HoboTacticsCodeTest.Cards
         }
 
         /// <summary>
-        /// Draws a card from the deck by it's CardID value
-        /// </summary>
-        /// <param name="cardname">Card.CardID</param>
-        public Card DrawCardByName(string cardname)
-        {
-            //find index location for name, pass that to _drawcard
-            int namedlocation;
-            namedlocation = Cards.FindIndex(i => i.CardID == cardname);
-            return this._drawCard(namedlocation);
-            //return Cards.Find(i => i.CardID == cardname);   
-            //throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Take each card from the donor deck
         /// </summary>
         /// <param name="DonorDeck">Deck</param>
         public void AbsorbDeck(Deck DonorDeck)
         {
-            int DonorSize = DonorDeck.Count;
-            for (int i = 0; i < DonorSize; i++)
-            {
-                this.PutCardBottom(DonorDeck.Cards[i]);
+            while (DonorDeck.Count > 0) {
+                this.PutCardBottom(DonorDeck.DrawCard());
             }
         }
     }
