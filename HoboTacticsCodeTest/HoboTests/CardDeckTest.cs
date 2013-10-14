@@ -180,14 +180,16 @@ namespace HoboTests
         [Test]
         public void MergeDecks()
         {
-            Deck TestDeck1 = new Deck();
-            this._createStandardDeck(TestDeck1);
-            Deck TestDeck2 = new Deck();
-            this._createStandardDeck(TestDeck1);
+
+            Deck TestDeck1 = this._createStandardDeck(new Deck());
+            Deck TestDeck2 = this._createStandardDeck(new Deck());
             int CardCount1 = TestDeck1.Count;
             int CardCount2 = TestDeck2.Count;
+            Assert.AreEqual(54, TestDeck1.Count);
+            Assert.AreEqual(54, TestDeck2.Count); 
             TestDeck1.AbsorbDeck(TestDeck2);
-            Assert.AreEqual((CardCount1 + CardCount2), TestDeck1.Count);            
+            Assert.AreEqual((CardCount1 + CardCount2), TestDeck1.Count);
+            Assert.AreEqual(0, TestDeck2.Count);
         }
 
     }
